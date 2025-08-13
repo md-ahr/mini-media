@@ -174,11 +174,11 @@ export default function SavedPosts() {
     }
   };
 
-  const handleRemoveFromSaved = (postId: number) => {
+  const handleRemoveFromSaved = () => {
     // Handle remove from saved logic
   };
 
-  const handleMoveToCollection = (postId: number, collectionId: string) => {
+  const handleMoveToCollection = () => {
     // Handle move to collection logic
   };
 
@@ -414,16 +414,14 @@ export default function SavedPosts() {
                     </div>
                     <div className="flex items-center space-x-1">
                       <button
-                        onClick={() =>
-                          handleMoveToCollection(post.id, "inspiration")
-                        }
+                        onClick={() => handleMoveToCollection()}
                         className="p-1 text-gray-600 hover:text-blue-600 transition-colors"
                         title="Move to collection"
                       >
                         <Edit3 className="h-3 w-3" />
                       </button>
                       <button
-                        onClick={() => handleRemoveFromSaved(post.id)}
+                        onClick={() => handleRemoveFromSaved()}
                         className="p-1 text-gray-600 hover:text-red-600 transition-colors"
                         title="Remove from saved"
                       >

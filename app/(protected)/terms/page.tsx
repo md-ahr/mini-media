@@ -22,7 +22,6 @@ import { useState } from "react";
 
 export default function Terms() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeSection, setActiveSection] = useState("overview");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(["overview"])
   );

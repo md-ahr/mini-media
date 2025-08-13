@@ -81,7 +81,7 @@ export default function Privacy() {
     },
   ];
 
-  const handlePrivacyChange = (setting: string, value: any) => {
+  const handlePrivacyChange = (setting: string, value: boolean | string) => {
     setPrivacySettings((prev) => ({
       ...prev,
       [setting]: value,
@@ -194,8 +194,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Profile Visibility
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Who can see your profile
+                      <p className="text-gray-600 text-sm">
+                        Control who can see your profile and posts
                       </p>
                     </div>
                     <select
@@ -216,8 +216,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Online Status
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Show when you're online
+                      <p className="text-gray-600 text-sm">
+                        Manage your account&apos;s privacy settings
                       </p>
                     </div>
                     <Switch
@@ -231,8 +231,8 @@ export default function Privacy() {
                   <div className="flex items-center justify-between py-3 border-b border-gray-100">
                     <div>
                       <h3 className="font-medium text-gray-900">Last Seen</h3>
-                      <p className="text-sm text-gray-600">
-                        Show when you were last active
+                      <p className="text-gray-600 text-sm">
+                        Manage your account&apos;s privacy settings
                       </p>
                     </div>
                     <Switch
@@ -248,8 +248,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Friend Requests
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Allow others to send you friend requests
+                      <p className="text-gray-600 text-sm">
+                        Manage your account&apos;s privacy settings
                       </p>
                     </div>
                     <Switch
@@ -284,8 +284,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Default Post Visibility
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Who can see your posts by default
+                      <p className="text-gray-600 text-sm">
+                        Control who can see your profile and posts
                       </p>
                     </div>
                     <select
@@ -306,8 +306,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Allow Tagging
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Let others tag you in posts and photos
+                      <p className="text-gray-600 text-sm">
+                        Control who can see your profile and posts
                       </p>
                     </div>
                     <Switch
@@ -323,8 +323,8 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Allow Sharing
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Let others share your posts
+                      <p className="text-gray-600 text-sm">
+                        Control who can see your profile and posts
                       </p>
                     </div>
                     <Switch
@@ -357,7 +357,7 @@ export default function Privacy() {
                   <div className="flex items-center justify-between py-3 border-b border-gray-100">
                     <div>
                       <h3 className="font-medium text-gray-900">Analytics</h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-gray-600 text-sm">
                         Help us improve by sharing usage data
                       </p>
                     </div>
@@ -374,7 +374,7 @@ export default function Privacy() {
                       <h3 className="font-medium text-gray-900">
                         Personalization
                       </h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-gray-600 text-sm">
                         Personalize your experience
                       </p>
                     </div>
@@ -389,7 +389,7 @@ export default function Privacy() {
                   <div className="flex items-center justify-between py-3">
                     <div>
                       <h3 className="font-medium text-gray-900">Marketing</h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-gray-600 text-sm">
                         Receive personalized ads and offers
                       </p>
                     </div>

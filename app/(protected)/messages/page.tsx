@@ -27,9 +27,34 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+interface Message {
+  id: number;
+  text: string;
+  sender: string;
+  timestamp: string;
+  isRead: boolean;
+}
+
+interface ConversationType {
+  id: number;
+  user: {
+    name: string;
+    username: string;
+    avatar: string;
+    status: string;
+    lastSeen: string;
+  };
+  lastMessage: string;
+  lastMessageTime: string;
+  unreadCount: number;
+  isPinned: boolean;
+  messages: Message[];
+}
+
 export default function Messages() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedConversation, setSelectedConversation] = useState<any>(null);
+  const [selectedConversation, setSelectedConversation] =
+    useState<ConversationType | null>(null);
   const [messageText, setMessageText] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [showConversationMenu, setShowConversationMenu] = useState(false);
@@ -219,17 +244,17 @@ export default function Messages() {
     };
   }, []);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
     if (messageText.trim() && selectedConversation) {
-      const newMessage = {
-        id: Date.now(),
-        text: messageText,
+      const newMessage: Message = {
+        id: Date.now(), // Changed to Date.now() to match existing Message interface
+        text: messageText.trim(),
         sender: "me",
-        timestamp: "now",
-        isRead: false,
+        timestamp: new Date().toISOString(), // Changed to new Date().toISOString()
+        isRead: true,
       };
 
-      // Update conversations state properly
       setConversations((prevConversations) =>
         prevConversations.map((conv) =>
           conv.id === selectedConversation.id
@@ -239,20 +264,23 @@ export default function Messages() {
       );
 
       // Update selected conversation
-      setSelectedConversation((prev) => ({
-        ...prev,
-        messages: [...prev.messages, newMessage],
-      }));
+      setSelectedConversation((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          messages: [...prev.messages, newMessage],
+        };
+      });
 
       setMessageText("");
       scrollToBottom();
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      handleSendMessage(e as React.FormEvent);
     }
   };
 
@@ -432,7 +460,7 @@ export default function Messages() {
 
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {selectedConversation.messages.map((message: any) => (
+                {selectedConversation.messages.map((message: Message) => (
                   <div
                     key={message.id}
                     className={`flex ${

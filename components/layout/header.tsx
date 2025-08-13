@@ -166,7 +166,7 @@ export function Header({ userPromise }: HeaderProps) {
                         <p className="text-sm text-gray-900 line-clamp-2">
                           Sarah liked your photo
                         </p>
-                        <span className="text-xs text-gray-500">2 min ago</span>
+                        <p className="text-xs text-gray-500">2 min ago</p>
                       </div>
                     </div>
                   </div>
@@ -179,9 +179,7 @@ export function Header({ userPromise }: HeaderProps) {
                         <p className="text-sm text-gray-900 line-clamp-2">
                           Mike sent you a friend request
                         </p>
-                        <span className="text-xs text-gray-500">
-                          1 hour ago
-                        </span>
+                        <p className="text-xs text-gray-500">1 hour ago</p>
                       </div>
                     </div>
                   </div>
@@ -192,9 +190,9 @@ export function Header({ userPromise }: HeaderProps) {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-900 line-clamp-2">
-                          Your album "Vacation 2024" was updated
+                          Your album &quot;Vacation 2024&quot; was updated
                         </p>
-                        <span className="text-xs text-gray-500">Yesterday</span>
+                        <p className="text-xs text-gray-500">Yesterday</p>
                       </div>
                     </div>
                   </div>
@@ -241,10 +239,10 @@ export function Header({ userPromise }: HeaderProps) {
                           <p className="text-sm font-medium text-gray-900">
                             Sarah Wilson
                           </p>
-                          <span className="text-xs text-gray-500">2m</span>
+                          <p className="text-xs text-gray-500">2m</p>
                         </div>
                         <p className="text-sm text-gray-600 line-clamp-1">
-                          Hey! How's the new project going?
+                          Hey! How&apos;s the new project going?
                         </p>
                       </div>
                     </div>
@@ -265,7 +263,7 @@ export function Header({ userPromise }: HeaderProps) {
                           <p className="text-sm font-medium text-gray-900">
                             Mike Johnson
                           </p>
-                          <span className="text-xs text-gray-500">1h</span>
+                          <p className="text-xs text-gray-500">1h</p>
                         </div>
                         <p className="text-sm text-gray-600 line-clamp-1">
                           Thanks for the help yesterday!
@@ -289,7 +287,7 @@ export function Header({ userPromise }: HeaderProps) {
                           <p className="text-sm font-medium text-gray-900">
                             Emma Davis
                           </p>
-                          <span className="text-xs text-gray-500">3h</span>
+                          <p className="text-xs text-gray-500">3h</p>
                         </div>
                         <p className="text-sm text-gray-600 line-clamp-1">
                           Are you free for a quick call?

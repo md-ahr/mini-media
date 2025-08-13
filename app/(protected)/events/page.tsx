@@ -22,9 +22,8 @@ import { useState } from "react";
 
 export default function Events() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [showCreateEvent, setShowCreateEvent] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
 
   // Mock event categories
   const categories = [
@@ -39,9 +38,9 @@ export default function Events() {
   ];
 
   // Mock events data
-  const events = [
+  const mockEvents = [
     {
-      id: 1,
+      id: "1",
       title: "Summer Music Festival",
       description:
         "Join us for an amazing day of live music, food, and fun! Featuring local bands and artists.",
@@ -63,7 +62,7 @@ export default function Events() {
       tags: ["Live Music", "Outdoor", "Family Friendly"],
     },
     {
-      id: 2,
+      id: "2",
       title: "Tech Startup Meetup",
       description:
         "Network with fellow entrepreneurs and learn about the latest trends in technology and business.",
@@ -85,7 +84,7 @@ export default function Events() {
       tags: ["Networking", "Technology", "Startups"],
     },
     {
-      id: 3,
+      id: "3",
       title: "Basketball Tournament",
       description:
         "Annual community basketball tournament for all skill levels. Prizes for winners!",
@@ -107,7 +106,7 @@ export default function Events() {
       tags: ["Basketball", "Tournament", "Community"],
     },
     {
-      id: 4,
+      id: "4",
       title: "Art Gallery Opening",
       description:
         "Exclusive opening night for our new contemporary art exhibition. Wine and appetizers included.",
@@ -129,7 +128,7 @@ export default function Events() {
       tags: ["Art", "Exhibition", "Networking"],
     },
     {
-      id: 5,
+      id: "5",
       title: "Yoga in the Park",
       description:
         "Free outdoor yoga session for all levels. Bring your own mat and enjoy nature!",
@@ -151,7 +150,7 @@ export default function Events() {
       tags: ["Yoga", "Outdoor", "Wellness"],
     },
     {
-      id: 6,
+      id: "6",
       title: "Food Truck Festival",
       description:
         "A celebration of local cuisine with food trucks, live music, and family activities.",
@@ -174,9 +173,9 @@ export default function Events() {
     },
   ];
 
-  const filteredEvents = events.filter(
+  const filteredEvents = mockEvents.filter(
     (event) =>
-      (activeCategory === "all" || event.category === activeCategory) &&
+      (selectedCategory === "all" || event.category === selectedCategory) &&
       (event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.location.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -195,12 +194,14 @@ export default function Events() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleAttend = (eventId: number) => {
+  const handleAttend = (eventId: string) => {
     // Handle attend logic
+    console.log("Attending event:", eventId);
   };
 
-  const handleSave = (eventId: number) => {
+  const handleSave = (eventId: string) => {
     // Handle save logic
+    console.log("Saving event:", eventId);
   };
 
   const formatDate = (dateString: string) => {
@@ -210,18 +211,6 @@ export default function Events() {
       day: "numeric",
       year: "numeric",
     });
-  };
-
-  const getEventStatus = (event: any) => {
-    const eventDate = new Date(event.date);
-    const today = new Date();
-    const diffTime = eventDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 0) return "past";
-    if (diffDays === 0) return "today";
-    if (diffDays <= 7) return "this-week";
-    return "upcoming";
   };
 
   return (
@@ -274,9 +263,9 @@ export default function Events() {
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => setSelectedCategory(category.id)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    activeCategory === category.id
+                    selectedCategory === category.id
                       ? "bg-blue-100 text-blue-700"
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}

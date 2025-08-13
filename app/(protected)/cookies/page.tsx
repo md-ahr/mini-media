@@ -30,9 +30,20 @@ export default function CookiesPage() {
     marketing: false,
   });
 
+  const handleToggle = (key: keyof typeof preferences) => {
+    setPreferences((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
   const toggleSection = (id: string) => {
     const next = new Set(expandedSections);
-    next.has(id) ? next.delete(id) : next.add(id);
+    if (next.has(id)) {
+      next.delete(id);
+    } else {
+      next.add(id);
+    }
     setExpandedSections(next);
   };
 
@@ -198,9 +209,7 @@ export default function CookiesPage() {
                 </div>
                 <Switch
                   checked={preferences.analytics}
-                  onCheckedChange={(v) =>
-                    setPreferences((p) => ({ ...p, analytics: !!v }))
-                  }
+                  onCheckedChange={() => handleToggle("analytics")}
                   aria-label="Enable analytics cookies"
                 />
               </div>
@@ -216,9 +225,7 @@ export default function CookiesPage() {
                 </div>
                 <Switch
                   checked={preferences.personalization}
-                  onCheckedChange={(v) =>
-                    setPreferences((p) => ({ ...p, personalization: !!v }))
-                  }
+                  onCheckedChange={() => handleToggle("personalization")}
                   aria-label="Enable personalization cookies"
                 />
               </div>
@@ -232,9 +239,7 @@ export default function CookiesPage() {
                 </div>
                 <Switch
                   checked={preferences.marketing}
-                  onCheckedChange={(v) =>
-                    setPreferences((p) => ({ ...p, marketing: !!v }))
-                  }
+                  onCheckedChange={() => handleToggle("marketing")}
                   aria-label="Enable marketing cookies"
                 />
               </div>

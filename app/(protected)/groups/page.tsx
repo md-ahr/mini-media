@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Calendar,
+  Eye,
   Filter,
   Globe,
   Heart,
@@ -24,9 +25,8 @@ import { useState } from "react";
 
 export default function Groups() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [showCreateGroup, setShowCreateGroup] = useState(false);
-  const [selectedGroup, setSelectedGroup] = useState(null);
 
   // Mock group categories
   const categories = [
@@ -41,9 +41,9 @@ export default function Groups() {
   ];
 
   // Mock groups data
-  const groups = [
+  const mockGroups = [
     {
-      id: 1,
+      id: "1",
       name: "Tech Enthusiasts",
       description:
         "A community for technology lovers to discuss the latest trends, share knowledge, and network with fellow tech professionals.",
@@ -65,7 +65,7 @@ export default function Groups() {
       createdDate: "2 years ago",
     },
     {
-      id: 2,
+      id: "2",
       name: "Startup Founders Network",
       description:
         "Connect with fellow entrepreneurs, share experiences, and get advice on building successful startups.",
@@ -87,7 +87,7 @@ export default function Groups() {
       createdDate: "1 year ago",
     },
     {
-      id: 3,
+      id: "3",
       name: "Photography Lovers",
       description:
         "Share your best shots, get feedback, and learn new techniques from fellow photography enthusiasts.",
@@ -109,7 +109,7 @@ export default function Groups() {
       createdDate: "3 years ago",
     },
     {
-      id: 4,
+      id: "4",
       name: "Fitness & Wellness",
       description:
         "A supportive community for fitness enthusiasts to share workout routines, nutrition tips, and motivation.",
@@ -131,7 +131,7 @@ export default function Groups() {
       createdDate: "4 years ago",
     },
     {
-      id: 5,
+      id: "5",
       name: "Book Club",
       description:
         "Monthly book discussions, reading recommendations, and literary conversations for book lovers.",
@@ -153,7 +153,7 @@ export default function Groups() {
       createdDate: "6 months ago",
     },
     {
-      id: 6,
+      id: "6",
       name: "Travel Adventures",
       description:
         "Share travel stories, tips, and photos from around the world. Connect with fellow travelers and plan your next adventure.",
@@ -176,9 +176,9 @@ export default function Groups() {
     },
   ];
 
-  const filteredGroups = groups.filter(
+  const filteredGroups = mockGroups.filter(
     (group) =>
-      (activeCategory === "all" || group.category === activeCategory) &&
+      (selectedCategory === "all" || group.category === selectedCategory) &&
       (group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         group.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         group.location.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -197,16 +197,27 @@ export default function Groups() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleJoinGroup = (groupId: number) => {
+  const handleJoinGroup = (groupId: string) => {
     // Handle join group logic
+    console.log("Joining group:", groupId);
   };
 
-  const handleSaveGroup = (groupId: number) => {
+  const handleSaveGroup = (groupId: string) => {
     // Handle save group logic
+    console.log("Saving group:", groupId);
   };
 
   const getPrivacyIcon = (privacy: string) => {
-    return privacy === "private" ? Lock : Globe;
+    switch (privacy) {
+      case "public":
+        return <Globe className="h-4 w-4 text-green-600" />;
+      case "private":
+        return <Lock className="h-4 w-4 text-red-600" />;
+      case "secret":
+        return <Eye className="h-4 w-4 text-gray-600" />;
+      default:
+        return <Globe className="h-4 w-4 text-green-600" />;
+    }
   };
 
   const getPrivacyColor = (privacy: string) => {
@@ -264,9 +275,9 @@ export default function Groups() {
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => setSelectedCategory(category.id)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    activeCategory === category.id
+                    selectedCategory === category.id
                       ? "bg-blue-100 text-blue-700"
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}
@@ -307,10 +318,7 @@ export default function Groups() {
                         group.privacy
                       )} bg-white/90`}
                     >
-                      <getPrivacyIcon
-                        privacy={group.privacy}
-                        className="h-3 w-3 mr-1"
-                      />
+                      {getPrivacyIcon(group.privacy)}
                       {group.privacy}
                     </Badge>
                   </div>

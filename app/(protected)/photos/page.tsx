@@ -20,9 +20,8 @@ import { useState } from "react";
 
 export default function Photos() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("photos");
   const [viewMode, setViewMode] = useState("grid");
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   // Mock photo categories
   const categories = [
@@ -35,7 +34,7 @@ export default function Photos() {
   ];
 
   // Mock photos data
-  const photos = [
+  const mockPhotos = [
     {
       id: 1,
       title: "Sunset at the Beach",
@@ -177,7 +176,7 @@ export default function Photos() {
     },
   ];
 
-  const filteredPhotos = photos.filter(
+  const filteredPhotos = mockPhotos.filter(
     (photo) =>
       (activeTab === "all" || photo.category === activeTab) &&
       (photo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -195,14 +194,6 @@ export default function Photos() {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-  };
-
-  const handleLike = (photoId: number) => {
-    // Handle like logic
-  };
-
-  const handleFavorite = (photoId: number) => {
-    // Handle favorite logic
   };
 
   return (

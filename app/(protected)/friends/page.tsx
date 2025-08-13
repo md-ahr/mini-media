@@ -18,8 +18,7 @@ import { useState } from "react";
 
 export default function Friends() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("all");
-  const [showAddFriend, setShowAddFriend] = useState(false);
+  const [activeTab, setActiveTab] = useState("friends");
 
   // Mock friends data
   const friends = [
@@ -155,10 +154,7 @@ export default function Friends() {
                 </p>
               </div>
               <div className="flex items-center space-x-3">
-                <Button
-                  onClick={() => setShowAddFriend(true)}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
+                <Button className="bg-blue-600 hover:bg-blue-700">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Add Friend
                 </Button>

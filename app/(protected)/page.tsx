@@ -163,7 +163,6 @@ export default function Home() {
   const [posts, setPosts] = useState(mockPosts);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [newPostContent, setNewPostContent] = useState("");
-  const [selectedPrivacy, setSelectedPrivacy] = useState("friends");
 
   const handleLike = (postId: number) => {
     setPosts(
@@ -228,7 +227,7 @@ export default function Home() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -240,7 +239,7 @@ export default function Home() {
       scale: 1,
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -264,7 +263,7 @@ export default function Home() {
                 onClick={() => setShowCreatePost(true)}
                 className="w-full text-left p-3 bg-gray-50 rounded-xl border border-gray-200 text-gray-500 hover:bg-gray-100 transition-colors duration-200"
               >
-                What's on your mind?
+                What&apos;s on your mind?
               </button>
             </div>
           </div>
@@ -334,7 +333,8 @@ export default function Home() {
                       <button className="flex items-center space-x-1 text-sm text-blue-600 hover:bg-blue-50 px-2 py-1 rounded-md transition-colors duration-200">
                         <Users className="h-3 w-3" />
                         <span>
-                          {selectedPrivacy === "friends" ? "Friends" : "Public"}
+                          {/* selectedPrivacy === "friends" ? "Friends" : "Public" */}
+                          Public
                         </span>
                       </button>
                     </div>
@@ -387,7 +387,7 @@ export default function Home() {
             Stories
           </h2>
           <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide px-2">
-            {mockStories.map((story, index) => (
+            {mockStories.map((story) => (
               <motion.div
                 key={story.id}
                 variants={storyVariants}

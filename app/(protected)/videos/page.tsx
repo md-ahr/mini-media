@@ -20,8 +20,7 @@ import { useState } from "react";
 
 export default function Videos() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Mock video categories
   const categories = [
@@ -34,7 +33,7 @@ export default function Videos() {
   ];
 
   // Mock videos data
-  const videos = [
+  const mockVideos = [
     {
       id: 1,
       title: "Amazing Sunset at the Beach",
@@ -157,9 +156,9 @@ export default function Videos() {
     },
   ];
 
-  const filteredVideos = videos.filter(
+  const filteredVideos = mockVideos.filter(
     (video) =>
-      (activeCategory === "all" || video.category === activeCategory) &&
+      (selectedCategory === "all" || video.category === selectedCategory) &&
       (video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         video.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
@@ -177,12 +176,14 @@ export default function Videos() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleLike = (videoId: number) => {
+  const handleLike = (videoId: string) => {
     // Handle like logic
+    console.log("Liking video:", videoId);
   };
 
-  const handleDislike = (videoId: number) => {
+  const handleDislike = (videoId: string) => {
     // Handle dislike logic
+    console.log("Disliking video:", videoId);
   };
 
   return (
@@ -228,9 +229,9 @@ export default function Videos() {
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => setSelectedCategory(category.id)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    activeCategory === category.id
+                    selectedCategory === category.id
                       ? "bg-blue-100 text-blue-700"
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}
@@ -300,7 +301,7 @@ export default function Videos() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-1">
                       <button
-                        onClick={() => handleLike(video.id)}
+                        onClick={() => handleLike(video.id.toString())}
                         className={`p-2 rounded-lg transition-colors ${
                           video.isLiked
                             ? "text-red-600 bg-red-50"
@@ -318,7 +319,7 @@ export default function Videos() {
                       </span>
 
                       <button
-                        onClick={() => handleDislike(video.id)}
+                        onClick={() => handleDislike(video.id.toString())}
                         className={`p-2 rounded-lg transition-colors ${
                           video.isDisliked
                             ? "text-blue-600 bg-blue-50"
