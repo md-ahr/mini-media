@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
+import { CONTAINER_VARIANTS, ITEM_VARIANTS } from "@/lib/constants";
 import { ForgotPasswordFormData, forgotPasswordSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, type Variants } from "framer-motion";
@@ -33,22 +34,6 @@ export default function ForgotPassword() {
       console.error("Password reset error:", error);
       alert("Failed to send reset email. Please try again.");
     }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -83,13 +68,13 @@ export default function ForgotPassword() {
         <CardContent className="space-y-6">
           <Form {...form}>
             <motion.form
-              variants={containerVariants as Variants | undefined}
+              variants={CONTAINER_VARIANTS as Variants | undefined}
               initial="hidden"
               animate="visible"
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-6"
             >
-              <motion.div variants={itemVariants as Variants | undefined}>
+              <motion.div variants={ITEM_VARIANTS as Variants | undefined}>
                 <FormField
                   control={form.control}
                   name="email"
@@ -101,7 +86,7 @@ export default function ForgotPassword() {
                 />
               </motion.div>
 
-              <motion.div variants={itemVariants as Variants | undefined}>
+              <motion.div variants={ITEM_VARIANTS as Variants | undefined}>
                 <Button
                   type="submit"
                   className="w-full h-12 text-base font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
